@@ -16,7 +16,7 @@ git log
 
 echo "# JS" >> README.md
 
-git remote add origin https://github.com/testovaask5/ov4.git
+git remote add origin https://github.com/N1ckDeleted/web-dev.git
 git remote show origin
 git remote rm origin
 
@@ -24,4 +24,4 @@ git remote rm origin
 git push origin master
 
 // Скачать репозиторий
-git clone https://github.com/testovaask5/ov4.git
+git clone https://github.com/N1ckDeleted/web-dev.git
