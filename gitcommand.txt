@@ -1,0 +1,27 @@
+git init 
+git add .
+git status
+
+// Редактирование конфига
+git config user.name "Alexander Dmitriev"
+git config user.email test@example.com
+
+// Чтение конфига
+git config user.name
+git config user.email
+
+git commit -m "First commit"
+
+git log
+
+echo "# JS" >> README.md
+
+git remote add origin https://github.com/testovaask5/ov4.git
+git remote show origin
+git remote rm origin
+
+// Отправить данные на github
+git push origin master
+
+// Скачать репозиторий
+git clone https://github.com/testovaask5/ov4.git
