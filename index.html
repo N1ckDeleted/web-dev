@@ -9,7 +9,25 @@
     <title>Document</title>
 </head>
 <body>
-<input type="text" id="input" placeholder="User name">
+<form action="#" id="user_form">
+    <ul>
+        <li>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="user_name">
+        </li>
+        <li>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="user_email">
+        </li>
+        <li>
+            <label for="msg">Message:</label>
+            <input type="text" id="msg" name="user_message">
+        </li>
+    </ul>
+    <button type="submit">Send your message</button>
+</form>
+<div id="forum"></div>
+<!-- <input type="text" id="input" placeholder="User name">
 
 
 <input type="text" placeholder="User name">
@@ -17,7 +35,7 @@
 <button id="click">Click me</button>
 <div id="input-value">
 
-</div>
+</div> -->
 <script>
 
 </script>
