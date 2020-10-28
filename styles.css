@@ -1,0 +1,17 @@
+.form-group-custom {
+    margin-bottom: 0.5rem;
+}
+
+
+.form-group-custom label {
+    margin-bottom: 0rem;
+}
+
+.form-group-custom .form-control {
+    height: 1.8rem;
+    padding-top: .2rem;
+}
+
+#user_form {
+    margin-bottom: 1rem;
+}

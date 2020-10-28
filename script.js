@@ -1,12 +1,57 @@
+// tpSFqiCtPEJPqDxyOvQ3
+
 let userForm = document.querySelector("#user_form");
 let forum = document.querySelector("#forum");
-// console.log(form);
-// console.dir(form);
+let success = document.querySelector('#success');
+let list = forum.children;
+let errors = '';
+fetch('http://user08.test1.seschool.ru:3000/api/chat/').then((response) => {
+        if (response.ok) {
+            return response.json()
+        }
+    }).then((messages) => {
+        let resultHtml = ''
+        messages.forEach(message => {
+            resultHtml += `<li class="list-group-item">${message.username}: ${message.message}
+            </li>`
+        })
+        forum.innerHTML = resultHtml
+    })
+const postMessage = () =>{
+    const username = userForm[0].value
+    const email = userForm[1].value
+    const message = userForm[2].value
+    fetch('http://user08.test1.seschool.ru:3000/api/chat/', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'bearer tpSFqiCtPEJPqDxyOvQ3'
+        },
+        body: JSON.stringify({
+            username,
+            email,
+            message: message
+        })
+    }).then(response => {
+        if (response.ok) {
+            return response.json()
+        } else {
+            throw new Error(`Status: ${response.status}. Message: ${response.statusText}`)
+        }
+        
+    }).then(response => {
+        console.log(response)
+        success.textContent = '';
+        userForm[2].value = ''
+    }).catch(err => {
+        errors += 'Bad request. '
+        success.setAttribute('style', 'display: block; border: solid; border-width: 1px; border-color: red;');
+        success.textContent = errors;
+    })
+}
 
-// предотвращение перезагрузки страницы
+
 userForm.addEventListener('submit', function(event) {
-    // обработка внесенных в форме данных
-    // данные записанные в форме сохраняются в объекте
     event.preventDefault()
     const formData = new FormData(userForm)
     const userMessage = {
@@ -14,23 +59,32 @@ userForm.addEventListener('submit', function(event) {
         userEmail: formData.get('user_email'), 
         userMessage: formData.get('user_message')
     }
+    postMessage()
     userForm[0].value = ''
     userForm[1].value = ''
     userForm[2].value = ''
-    if (userMessage.userName && userMessage.userMessage) {
-        forum.innerHTML += `
-        <div>
-        <span>${userMessage.userName}: </span>
-        <span>${userMessage.userMessage}</span>
-        </div>
-        `;
+    if (userMessage.userName && userMessage.userMessage && userMessage.userEmail) {
+        forum.insertAdjacentHTML('afterbegin', `<li class="list-group-item">${userMessage.userName}: ${userMessage.userMessage}</li>`);       
     } else {
-        forum.innerHTML = `
-        <div>
-        <span>Не все поля заполнены!</span>
-        </div>
-        `;
+        if (!userMessage.userName) {
+            errors += 'Не введено имя. ';
+        }
+        if (!userMessage.userMessage) {
+            errors += 'Не введено сообщение. ';
+        }
+        if (!userMessage.userEmail) {
+            errors += 'Не введена электронная почта. ';
+        }
+        
+    } 
+    if (errors) {
+        success.setAttribute('style', 'display: block; border: solid; border-width: 1px; border-color: red;');
+        success.textContent = errors;
+    } else {
+        success.setAttribute('style', 'display: block; border: solid; border-width: 1px; border-color: yellowgreen;');
     }
+
+    
     
 }) 
 
@@ -45,41 +99,6 @@ userForm.addEventListener('submit', function(event) {
 
 
 
-
-
-
-
-// console.log('Step 1');
-// alert('Step 2');
-// console.log('Step 3');
-
-// function sumFunc (arg1, arg2, arg3) {
-//     return arg1+arg2+arg3;
-// }
-// let result = sumFunc(1, 2, 3);
-// console.log(result);
-// const button = document.querySelector('#click');
-// const text = document.querySelectorAll('input');
-// const div = document.querySelector('#input-value');
-
-// button.addEventListener('click', function (event) {
-//     div.innerText = text.value;
-//     console.log(event)
-// })
-
-
-
-// const inputListener = function (event) {
-//     const input = event.target;
-//     div.textContent = input.value;
-//     console.log(event)
-// }
-
-// for (const input of text) {
-//     input.addEventListener('input', inputListener);
-// }
-
-// text.addEventListener('input', inputListener);
 
 
 
